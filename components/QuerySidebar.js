@@ -20,7 +20,7 @@ const QuerySidebar = props => {
     }
 
     return (
-        <div class="rounded-xl m-3 w-1/5 bg-slate-800">
+        <div className="rounded-xl m-3 w-1/5 bg-slate-800">
             <input
                 className="m-3 w-20 text-sm ring-1 ring-sky-600 rounded-sm caret-sky-600 focus:ring-0 focus:ring-sky-200"
                 onBlur={e => updateInput(e)}

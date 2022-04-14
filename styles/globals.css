@@ -20,6 +20,14 @@ a {
 }
 
 @layer components {
+  .container {
+    @apply rounded-xl m-3 text-white w-2/5 bg-slate-800
+  }
+
+  .normal-th{
+    @apply border-b text-left
+  }
+
   .hover-tr {
     @apply hover:bg-slate-500 hover:cursor-pointer
   }

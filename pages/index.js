@@ -6,13 +6,13 @@ import { useState } from "react"
 export default function Home() {
 
   const [routeResult, setRouteResult] = useState([])
-  const [stopList, setStopList] = useState({})
+  const [stopInfo, setStopInfo] = useState([])
 
   return (
-    <div class="flex h-screen bg-slate-100 bg-slate-600">
+    <div className="flex h-screen bg-slate-100 bg-slate-600">
       <QuerySidebar setRouteResult={setRouteResult} />
-      <RouteResultList routeResult={routeResult} setStopList={setStopList} />
-      <RouteContentBox stopList={stopList} />
+      <RouteResultList routeResult={routeResult} setStopInfo={setStopInfo} />
+      <RouteContentBox stopInfo={stopInfo} />
 
     </div>
   )

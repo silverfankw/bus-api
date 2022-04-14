@@ -1,4 +1,4 @@
-import { BASE_URL, ENDPOINT_KMB_ROUTE_STOP } from "../api/const"
+import { BASE_URL, ENDPOINT_KMB_ROUTE_STOP, ENDPOINT_KMB_STOP } from "../api/const"
 
 const RouteResultList = props => {
     const routeResult = props.routeResult
@@ -8,19 +8,27 @@ const RouteResultList = props => {
             .then(resp => resp.json())
             .then(json => json.data.map(item => item.stop))
             .catch(error => console.log(error))
-        console.log(stopList)
-        props.setStopList(stopList)
+
+        const stopInfo = await Promise.all(
+            stopList.map(async stopID => {
+                return await fetch(`${BASE_URL}${ENDPOINT_KMB_STOP}/${stopID}`)
+                    .then(resp => resp.json())
+                    .then(json => json.data.name_tc)
+                    .catch(error => console.log(error))
+            })
+        )
+        props.setStopInfo(stopInfo)
     }
 
     return (
-        <div class="rounded-xl m-3 text-white w-2/5 bg-slate-800">
-            <p class="mx-3 my-2">搜尋結果</p>
-            <table class="mx-3 w-11/12 table-auto w-full text-sm">
+        <div className="container">
+            <p className="mx-3 my-2">搜尋結果</p>
+            <table className="mx-3 w-11/12 text-sm">
                 <thead>
                     <tr>
-                        <th class="border-b text-left">路線</th>
-                        <th class="border-b text-left">起點</th>
-                        <th class="border-b text-left">目的地</th>
+                        <th className="normal-th">路線</th>
+                        <th className="normal-th">起點</th>
+                        <th className="normal-th">目的地</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,11 +38,11 @@ const RouteResultList = props => {
                             <td> {"-"} </td>
                             <td> {"-"} </td>
                         </tr> :
-                        routeResult.map(record => (
-                            <tr class="hover-tr" onClick={e => searchRouteInfo(record)}>
-                                <td>{record.route}</td>
-                                <td>{record.orig_tc}</td>
-                                <td>{record.dest_tc}</td>
+                        routeResult.map((record, index) => (
+                            <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
+                                <td key={`route-result-${index}-route`}>{record.route}</td>
+                                <td key={`route-result-${index}-name_tc`}>{record.orig_tc}</td>
+                                <td key={`route-result-${index}-dest_tc`}>{record.dest_tc}</td>
                             </tr>
                         ))}
                 </tbody>
