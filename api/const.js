@@ -9,6 +9,7 @@ export const ENDPOINT_KMB_ROUTE_STOP = `${KMB_BASE}${KMB_API_VER}/transport/kmb/
 export const ENDPOINT_KMB_ETA = `${KMB_BASE}${KMB_API_VER}/transport/kmb/eta/`
 export const ENDPOINT_KMB_STOP_ETA = `${KMB_BASE}${KMB_API_VER}/transport/kmb/stop-eta/`
 export const ENDPOINT_KMB_ROUTE_ETA = `${KMB_BASE}${KMB_API_VER}/transport/kmb/route-eta/`
+export const ENDPOINT_KMB_SPECIAL_SERVICE = `https://search.kmb.hk/KMBWebSite/Function/FunctionRequest.ashx?action=getSpecialRoute`
 
 export const ENDPOINT_CTB_ROUTE = `${CTB_NWFB_BASE}${CTB_NWFB_API_VER}/transport/citybus-nwfb/route/ctb/`
 export const ENDPOINT_NWFB_ROUTE = `${CTB_NWFB_BASE}${CTB_NWFB_API_VER}/transport/citybus-nwfb/route/nwfb/`

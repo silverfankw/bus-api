@@ -19,10 +19,6 @@ a {
   box-sizing: border-box;
 }
 
-textarea {
-  resize: none
-}
-
 @layer components {
   .container {
     @apply rounded-xl m-3 text-white w-2/5 bg-slate-800

@@ -1,33 +1,26 @@
 import { useState } from "react"
+import LZUTF8 from "lzutf8"
+
+import { checkSpecialService } from "../api/request"
 import NormalButton from "../components/NormalButton"
 
-import {
-    ENDPOINT_KMB_ROUTE as KMB,
-    ENDPOINT_CTB_ROUTE as CTB,
-    ENDPOINT_NWFB_ROUTE as NWFB
-} from "../api/const"
-import { searchRouteList } from "../api/request"
-
 const QuerySidebar = props => {
-    const { setRouteSearching } = props
+    const { setRouteResult, setRouteSearching } = props
     const [userInput, setUserInput] = useState(null)
 
     const updateInput = e => {
-        setUserInput(e.target.value)
+        setUserInput(e.target.value.trim().toUpperCase())
     }
 
-    const searchRoute = async () => {
+    const findRoute = async () => {
+        const routeResult = JSON.parse(LZUTF8.decompress(localStorage.getItem("routes"), { inputEncoding: "Base64" }))
+
         setRouteSearching(true)
-        await Promise.all(
-            [
-                searchRouteList(KMB, userInput),
-                searchRouteList(CTB, userInput),
-                searchRouteList(NWFB, userInput)
-            ]
-        )
-            .then(resp => props.setRouteResult(resp.flat()))
-            .catch(error => console.log(error))
+        setRouteResult(routeResult.filter(route => route.route === userInput))
         setRouteSearching(false)
+
+        // const special = checkSpecialService(userInput)
+        // console.log(special)
     }
 
     return (
@@ -37,10 +30,11 @@ const QuerySidebar = props => {
             </div>
             <hr className="mx-3 my-1" />
             <input
-                className="mx-3 my-2 w-20 text-sm ring-2 ring-sky-600 rounded-sm caret-sky-600 focus:ring-2 focus:ring-sky-600"
+                className="mx-3 my-2 w-20 text-sm ring-2 ring-sky-600 rounded-sm caret-sky-600 
+                focus:ring-2 focus:ring-sky-600 focus:outline-none"
                 onBlur={e => updateInput(e)}
             />
-            <NormalButton value="Search" onClick={searchRoute} />
+            <NormalButton value="Search" onClick={findRoute} />
         </div >
     )
 }

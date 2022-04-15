@@ -13,7 +13,6 @@ const RouteContentBox = props => {
         navigator.clipboard.writeText(formattedStopInfo)
     }
 
-
     useEffect(() => {
         let formatted = ""
         stopInfo.forEach((stop, index) => {

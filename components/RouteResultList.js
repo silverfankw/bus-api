@@ -16,7 +16,7 @@ const RouteResultList = props => {
     }
 
     return (
-        <div className="container">
+        <div className="container shadow-lg shadow-violet-500/50">
             <p className="mx-3 my-2 font-bold">搜尋結果</p>
             {
                 routeSearching ? <Spinner /> :
@@ -39,17 +39,18 @@ const RouteResultList = props => {
                                 </tr> :
                                 routeResult.map((record, index) => (
                                     <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
-                                        <td key={`route-result-${index}-cmp`}>{record.co === undefined ? "KMB / LWB" : record.co}</td>
-                                        <td key={`route-result-${index}-route`}>{record.route}</td>
-                                        <td key={`route-result-${index}-name_tc`}>{record.orig_tc}</td>
-                                        <td key={`route-result-${index}-dest_tc`}>{record.dest_tc}</td>
+                                        <td key={`route-result-${index}-cmp`}>{record?.co === undefined ? "KMB / LWB" : record.co}</td>
+                                        <td key={`route-result-${index}-route`}
+                                            className={`${record.co === undefined && record.service_type !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
+                                        <td key={`route-result-${index}-name_tc`}>{record?.orig_tc}</td>
+                                        <td key={`route-result-${index}-dest_tc`}>{record?.dest_tc}</td>
                                     </tr>
                                 ))}
                         </tbody>
                     </table>
             }
 
-        </div>
+        </div >
     )
 }
 

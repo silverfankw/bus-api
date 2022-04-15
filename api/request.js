@@ -1,15 +1,20 @@
 import {
     ENDPOINT_KMB_ROUTE_STOP,
+    ENDPOINT_KMB_SPECIAL_SERVICE,
     ENDPOINT_CTB_NWFB_ROUTESTOP,
     ENDPOINT_KMB_STOP,
     ENDPOINT_CTB_NWFB_STOP
 } from "../api/const"
 
-/*
-    endpoint: Full API endpoint,
-    userInput: user input value
-*/
-export const searchRouteList = async (endpoint, userInput) => {
+export const searchRouteList = async (endpoint) => {
+    return await fetch(endpoint)
+        .then(resp => resp.json())
+        .then(json => json.data)
+        .catch(error => console.log(error))
+}
+
+/* Deprecated */
+export const searchRouteListByInput = async (endpoint, userInput) => {
     return await fetch(endpoint)
         .then(resp => resp.json())
         .then(json => json.data.filter(item => item.route === userInput))
@@ -49,5 +54,14 @@ export const translateStop = async (company, stopList) => {
         })
     )
 
+    return result
+}
+
+
+export const checkSpecialService = async route => {
+    const result = await fetch(`${ENDPOINT_KMB_SPECIAL_SERVICE}&route=${route}&bound=1`)
+        .then(resp => resp.json())
+        .then(json => json.data.routes.filter(route => parseInt(route.ServiceType.trim(), 10) != 1))
+        .catch(error => console.log(error))
     return result
 }
