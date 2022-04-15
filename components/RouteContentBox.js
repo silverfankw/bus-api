@@ -1,16 +1,18 @@
 import NormalButton from "./NormalButton"
+import Spinner from "./Spinner"
+import NormalTextArea from "./NormalTextArea"
+
 import { useState, useEffect, useRef, memo } from "react"
 
 const RouteContentBox = props => {
-    const stopInfo = props.stopInfo
-    const textAreaElem = useRef(null)
+    const { stopInfo, stopSearching } = props
 
     const [formattedStopInfo, setFormattedStopInfo] = useState("")
-    // console.log(stopInfo)
 
     const copyTextContent = (e) => {
         navigator.clipboard.writeText(formattedStopInfo)
     }
+
 
     useEffect(() => {
         let formatted = ""
@@ -26,16 +28,18 @@ const RouteContentBox = props => {
     return (
         <div className="container">
             <div className="flex mt-2">
-                <p className="mx-4">站位資料</p>
+                <p className="mx-4 font-bold">站位資料</p>
                 <NormalButton value="Copy" onClick={copyTextContent} style="mb-1" />
             </div>
-            <textarea
-                className="rounded-lg mx-3 my-2 pl-2 pt-1 w-11/12 text-sm"
-                ref={textAreaElem}
-                value={formattedStopInfo}
-                rows={stopInfo.length > 40 ? 40 : stopInfo.length}
-                disabled
-            ></textarea>
+            {stopSearching ?
+                <Spinner /> :
+                <NormalTextArea
+                    placeholder="No data"
+                    value={formattedStopInfo}
+                    rows={stopInfo.length}
+                    disabled
+                />
+            }
         </div>
     )
 }
