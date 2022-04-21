@@ -2,25 +2,25 @@ import { searchRouteStop, translateStop } from "../api/request"
 import Spinner from "./Spinner"
 
 const RouteResultList = props => {
-    const { routeResult, routeSearching, setStopSearching } = props
+    const { language, routeResult, routeSearching, setStopSearching } = props
 
     const searchRouteInfo = async selectedRecord => {
         const company = selectedRecord.co === undefined ? "KMB" : selectedRecord.co
 
         setStopSearching(true)
         const stopList = await searchRouteStop(company, selectedRecord)
-        const stopInfo = await translateStop(company, stopList)
+        const stopInfo = await translateStop(company, stopList, language)
         setStopSearching(false)
 
         props.setStopInfo(stopInfo)
     }
 
     return (
-        <div className="container shadow-lg shadow-violet-500/50">
+        <div className="container">
             <p className="mx-3 my-2 font-bold">搜尋結果</p>
             {
                 routeSearching ? <Spinner /> :
-                    <table className="mx-3 w-11/12 text-sm">
+                    <table className="table-auto mx-3 w-11/12 text-sm">
                         <thead>
                             <tr>
                                 <th className="normal-th">公司</th>
@@ -39,7 +39,7 @@ const RouteResultList = props => {
                                 </tr> :
                                 routeResult.map((record, index) => (
                                     <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
-                                        <td key={`route-result-${index}-cmp`}>{record?.co === undefined ? "KMB / LWB" : record.co}</td>
+                                        <td key={`route-result-${index}-cmp`}>{record?.co === undefined ? "九巴 / 龍運" : record.co === "CTB" ? "城巴" : "新巴"}</td>
                                         <td key={`route-result-${index}-route`}
                                             className={`${record.co === undefined && record.service_type !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
                                         <td key={`route-result-${index}-name_tc`}>{record?.orig_tc}</td>

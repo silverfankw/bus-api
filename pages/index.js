@@ -18,6 +18,7 @@ export default function Home() {
   const [stopInfo, setStopInfo] = useState([])
   const [routeSearching, setRouteSearching] = useState(false)
   const [stopSearching, setStopSearching] = useState(false)
+  const [language, setLanguage] = useState("name_tc")
 
   const initRoutesList = async () => {
     await Promise.all(
@@ -33,10 +34,10 @@ export default function Home() {
   }, [])
 
   return (
-    <div className="flex h-screen bg-zinc-600">
+    <div className="flex h-screen bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
       <QuerySidebar setRouteSearching={setRouteSearching} setRouteResult={setRouteResult} />
-      <RouteResultList routeResult={routeResult} routeSearching={routeSearching} setStopSearching={setStopSearching} setStopInfo={setStopInfo} />
-      <RouteContentBox stopSearching={stopSearching} stopInfo={stopInfo} />
+      <RouteResultList language={language} routeResult={routeResult} routeSearching={routeSearching} setStopSearching={setStopSearching} setStopInfo={setStopInfo} />
+      <RouteContentBox language={language} setLanguage={setLanguage} stopSearching={stopSearching} stopInfo={stopInfo} />
 
     </div>
   )

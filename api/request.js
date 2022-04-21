@@ -1,3 +1,6 @@
+// import _ from "lodash"
+import { capitalize } from "../util/util"
+
 import {
     ENDPOINT_KMB_ROUTE_STOP,
     ENDPOINT_KMB_SPECIAL_SERVICE,
@@ -37,7 +40,7 @@ export const searchRouteStop = async (company, record) => {
 }
 
 
-export const translateStop = async (company, stopList) => {
+export const translateStop = async (company, stopList, lang) => {
     const result = await Promise.all(
         stopList.map(async stopID => {
             return await fetch(
@@ -46,9 +49,18 @@ export const translateStop = async (company, stopList) => {
                     : `${ENDPOINT_KMB_STOP}${stopID}`)
                 .then(resp => resp.json())
                 .then(json => {
+                    console.log(json)
                     if (company === "CTB" || company === "NWFB")
-                        return json.data.name_tc.split(',')[0]
-                    else return json.data.name_tc
+                        return {
+                            name_tc: json.data.name_tc.split(',')[0],
+                            name_en: capitalize(json.data.name_en.split(',')[0])
+                        }
+                    else {
+                        return {
+                            name_tc: json.data.name_tc,
+                            name_en: capitalize(json.data.name_en)
+                        }
+                    }
                 })
                 .catch(error => console.log(error))
         })
@@ -62,6 +74,16 @@ export const checkSpecialService = async route => {
     const result = await fetch(`${ENDPOINT_KMB_SPECIAL_SERVICE}&route=${route}&bound=1`)
         .then(resp => resp.json())
         .then(json => json.data.routes.filter(route => parseInt(route.ServiceType.trim(), 10) != 1))
+        .then(routes => routes.map(route => {
+            return ({
+                route: route.Route,
+                orig_tc: route.Origin_CHI,
+                dest_tc: route.Destination_CHI,
+                service_type: route.ServiceType.trim().replace(/^0+/, ''),
+                special_msg: route.Desc_CHI,
+                bound: route.Bound == "1" ? 'O' : 'I'
+            })
+        }))
         .catch(error => console.log(error))
     return result
 }
