@@ -6,7 +6,7 @@ import RadioButton from "./RadioButton"
 import { useState, useEffect, useRef, memo } from "react"
 
 const RouteContentBox = props => {
-    const { stopInfo, stopSearching, language, setLanguage } = props
+    const { stopIDs, stopList, stopSearching, language, setLanguage } = props
 
     const [formattedStopInfo, setFormattedStopInfo] = useState("")
 
@@ -18,14 +18,14 @@ const RouteContentBox = props => {
 
     useEffect(() => {
         let formatted = ""
-        stopInfo.forEach((stop, index) => {
-            if (index == stopInfo.length - 1)
-                formatted = formatted.concat(stop[language])
+        stopIDs.forEach((stop, index) => {
+            if (index == stopIDs.length - 1)
+                formatted = formatted.concat(stopList[stop].name[language])
             else
-                formatted = formatted.concat(`${stop[language]} → ${stopInfo[index + 1][language]}\n`)
+                formatted = formatted.concat(`${stopList[stop].name[language]} → ${stopList[stopIDs[index + 1]].name[language]}\n`)
         })
         setFormattedStopInfo(formatted)
-    }, [stopInfo, language])
+    }, [stopIDs, language])
 
     return (
         <div className="container">
@@ -44,8 +44,8 @@ const RouteContentBox = props => {
                 <p className="mx-4 font-bold">站位資料</p>
                 <NormalButton value="Copy" onClick={copyTextContent} style="mb-1" />
                 <div className="flex mx-3">
-                    <RadioButton label="中文" name="language-setting" value="name_tc" checked={language === "name_tc"} onChange={() => handleLanguageChange("name_tc")} />
-                    <RadioButton label="英文" name="language-setting" value="name_en" onChange={() => handleLanguageChange("name_en")} />
+                    <RadioButton label="中文" name="language-setting" value="zh" checked={language === "zh"} onChange={() => handleLanguageChange("zh")} />
+                    <RadioButton label="英文" name="language-setting" value="en" onChange={() => handleLanguageChange("en")} />
                 </div>
             </div>
             {stopSearching ?
@@ -53,7 +53,7 @@ const RouteContentBox = props => {
                 <NormalTextArea
                     placeholder="No data"
                     value={formattedStopInfo}
-                    rows={stopInfo.length}
+                    rows={stopIDs.length}
                     disabled
                 />
             }

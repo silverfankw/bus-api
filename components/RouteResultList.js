@@ -1,18 +1,15 @@
 import { searchRouteStop, translateStop } from "../api/request"
+import { companyMap } from "../util/mapper"
 import Spinner from "./Spinner"
 
 const RouteResultList = props => {
-    const { language, routeResult, routeSearching, setStopSearching } = props
+    const { language, routeResult, routeSearching, setStopSearching,
+        setStopIDs } = props
 
     const searchRouteInfo = async selectedRecord => {
-        const company = selectedRecord.co === undefined ? "KMB" : selectedRecord.co
-
         setStopSearching(true)
-        const stopList = await searchRouteStop(company, selectedRecord)
-        const stopInfo = await translateStop(company, stopList, language)
+        setStopIDs(selectedRecord.stops[selectedRecord.co[0]])
         setStopSearching(false)
-
-        props.setStopInfo(stopInfo)
     }
 
     return (
@@ -37,15 +34,20 @@ const RouteResultList = props => {
                                     <td> {"-"} </td>
                                     <td> {"-"} </td>
                                 </tr> :
-                                routeResult.map((record, index) => (
+                                routeResult.map((record, index) => {
+                                    // console.log(record)
+                                    return (
                                     <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
-                                        <td key={`route-result-${index}-cmp`}>{record?.co === undefined ? "九巴 / 龍運" : record.co === "CTB" ? "城巴" : "新巴"}</td>
+                                        <td key={`route-result-${index}-cmp`}>
+                                            {record.co.map(co => companyMap[co])}</td>
                                         <td key={`route-result-${index}-route`}
-                                            className={`${record.co === undefined && record.service_type !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
-                                        <td key={`route-result-${index}-name_tc`}>{record?.orig_tc}</td>
-                                        <td key={`route-result-${index}-dest_tc`}>{record?.dest_tc}</td>
+                                            className={`${record.serviceType !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
+                                        <td key={`route-result-${index}-name_tc`}>{record.orig[language]}</td>
+                                        <td key={`route-result-${index}-dest_tc`}>{record.dest[language]}</td>
                                     </tr>
-                                ))}
+                                )
+})
+                            }
                         </tbody>
                     </table>
             }

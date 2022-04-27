@@ -1,43 +1,50 @@
 import { useState, useEffect } from "react"
 import LZUTF8 from "lzutf8"
 
+import { capitalize } from "../util/util"
 import QuerySidebar from "../components/QuerySidebar"
 import RouteContentBox from "../components/RouteContentBox"
 import RouteResultList from "../components/RouteResultList"
 
-import { searchRouteList } from "../api/request"
-import {
-  ENDPOINT_KMB_ROUTE as KMB,
-  ENDPOINT_CTB_ROUTE as CTB,
-  ENDPOINT_NWFB_ROUTE as NWFB
-} from "../api/const"
+import { getBusDB } from "../api/request"
 
 export default function Home() {
 
   const [routeResult, setRouteResult] = useState([])
-  const [stopInfo, setStopInfo] = useState([])
+  const [stopList, setStopList] = useState({})
+
+  const [stopIDs, setStopIDs] = useState([])
   const [routeSearching, setRouteSearching] = useState(false)
   const [stopSearching, setStopSearching] = useState(false)
-  const [language, setLanguage] = useState("name_tc")
+  const [language, setLanguage] = useState("zh")
 
-  const initRoutesList = async () => {
-    await Promise.all(
-      [searchRouteList(KMB), searchRouteList(CTB), searchRouteList(NWFB)]
-    )
-      .then(resp => localStorage.setItem('routes', LZUTF8.compress(JSON.stringify(resp.flat()), { outputEncoding: "Base64" })))
-      // .then(resp => localStorage.setItem('routes', JSON.stringify(resp.flat())))
+  const retrieveData = async () => {
+    await getBusDB()
+      .then(resp => {
+        localStorage.setItem('bus_data', JSON.stringify(resp))
+        Object.values(resp.stopList).map(stop => {
+          if (stop.name.zh.includes(',')) {
+            stop.name.zh = stop.name.zh.split(',')[0]
+          }
+          if (stop.name.en.includes(',')) {
+            stop.name.en = stop.name.en.split(',')[0]
+          }        
+          stop.name.en = capitalize(stop.name.en)
+        })
+        setStopList(resp.stopList)
+      })
       .catch(error => console.log(error))
   }
 
   useEffect(() => {
-    initRoutesList()
+    retrieveData()
   }, [])
 
   return (
     <div className="flex h-screen bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
       <QuerySidebar setRouteSearching={setRouteSearching} setRouteResult={setRouteResult} />
-      <RouteResultList language={language} routeResult={routeResult} routeSearching={routeSearching} setStopSearching={setStopSearching} setStopInfo={setStopInfo} />
-      <RouteContentBox language={language} setLanguage={setLanguage} stopSearching={stopSearching} stopInfo={stopInfo} />
+      <RouteResultList language={language} routeResult={routeResult} routeSearching={routeSearching} setStopSearching={setStopSearching} setStopIDs={setStopIDs} stopList={stopList}/>
+      <RouteContentBox language={language} setLanguage={setLanguage} stopSearching={stopSearching} stopList={stopList} stopIDs={stopIDs} />
 
     </div>
   )

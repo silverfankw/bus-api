@@ -16,3 +16,6 @@ export const ENDPOINT_NWFB_ROUTE = `${CTB_NWFB_BASE}${CTB_NWFB_API_VER}/transpor
 
 export const ENDPOINT_CTB_NWFB_ROUTESTOP = `${CTB_NWFB_BASE}${CTB_NWFB_API_VER}/transport/citybus-nwfb/route-stop/`
 export const ENDPOINT_CTB_NWFB_STOP = `${CTB_NWFB_BASE}${CTB_NWFB_API_VER}/transport/citybus-nwfb/stop/`
+
+
+export const ENDPOINT_HK_BUS_CRAWLER = "https://hkbus.github.io/hk-bus-crawling/routeFareList.min.json"

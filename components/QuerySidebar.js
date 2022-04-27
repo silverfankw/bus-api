@@ -1,7 +1,6 @@
 import { useState } from "react"
 import LZUTF8 from "lzutf8"
 
-import { checkSpecialService } from "../api/request"
 import NormalButton from "../components/NormalButton"
 
 const QuerySidebar = props => {
@@ -13,21 +12,12 @@ const QuerySidebar = props => {
     }
 
     const findRoute = async () => {
-        const routelist = JSON.parse(LZUTF8.decompress(localStorage.getItem("routes"), { inputEncoding: "Base64" }))
+        const busData = JSON.parse(localStorage.getItem("bus_data")).routeList
 
         setRouteSearching(true)
-        const result = routelist.filter(route => route.route === userInput && (route.service_type == 1 || route.service_type === undefined))
-        // setRouteResult(routelist.filter(route => route.route === userInput))
-        const special = await checkSpecialService(userInput)
-        if (special.length) {
-            result.push(...special)
-        }
-        // console.log(result)
-        setRouteResult(result)
-
+        setRouteResult(Object.values(busData).filter(route => route.route === userInput))
         setRouteSearching(false)
     }
-
 
     return (
         <div className="rounded-xl m-3 w-1/5 bg-slate-800">
