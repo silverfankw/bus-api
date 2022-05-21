@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
 import LZUTF8 from "lzutf8"
 
 import { capitalize } from "../util/util"
@@ -14,8 +14,6 @@ export default function Home() {
   const [stopList, setStopList] = useState({})
 
   const [stopIDs, setStopIDs] = useState([])
-  const [routeSearching, setRouteSearching] = useState(false)
-  const [stopSearching, setStopSearching] = useState(false)
   const [language, setLanguage] = useState("zh")
 
   const retrieveData = async () => {
@@ -28,7 +26,7 @@ export default function Home() {
           }
           if (stop.name.en.includes(',')) {
             stop.name.en = stop.name.en.split(',')[0]
-          }        
+          }
           stop.name.en = capitalize(stop.name.en)
         })
         setStopList(resp.stopList)
@@ -42,9 +40,9 @@ export default function Home() {
 
   return (
     <div className="flex h-screen bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
-      <QuerySidebar setRouteSearching={setRouteSearching} setRouteResult={setRouteResult} />
-      <RouteResultList language={language} routeResult={routeResult} routeSearching={routeSearching} setStopSearching={setStopSearching} setStopIDs={setStopIDs} stopList={stopList}/>
-      <RouteContentBox language={language} setLanguage={setLanguage} stopSearching={stopSearching} stopList={stopList} stopIDs={stopIDs} />
+      <QuerySidebar setRouteResult={setRouteResult} />
+      <RouteResultList language={language} routeResult={routeResult} setStopIDs={setStopIDs} stopList={stopList} />
+      <RouteContentBox language={language} setLanguage={setLanguage} stopList={stopList} stopIDs={stopIDs} />
 
     </div>
   )

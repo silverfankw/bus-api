@@ -1,23 +1,35 @@
-import { useState } from "react"
-import LZUTF8 from "lzutf8"
+import { useState, useEffect, useMemo } from "react"
+import _ from "lodash"
 
-import NormalButton from "../components/NormalButton"
+import NormalButton from "./NormalButton"
+import NormalInput from "./NormalInput"
 
 const QuerySidebar = props => {
-    const { setRouteResult, setRouteSearching, setLanguage } = props
+    const { setRouteResult } = props
     const [userInput, setUserInput] = useState(null)
+    const [routes, setRoutes] = useState([])
+
 
     const updateInput = e => {
         setUserInput(e.target.value.trim().toUpperCase())
+        findRoute()
     }
 
     const findRoute = async () => {
-        const busData = JSON.parse(localStorage.getItem("bus_data")).routeList
-
-        setRouteSearching(true)
-        setRouteResult(Object.values(busData).filter(route => route.route === userInput))
-        setRouteSearching(false)
+        setRouteResult(routes.filter(route => route.route === userInput))
+        console.log("search")
     }
+
+    useEffect(() => {
+        const storage = window.localStorage.getItem("bus_data")
+        if (storage)
+            setRoutes(_.values(_.mapValues(JSON.parse(localStorage.getItem("bus_data"))?.routeList)))
+    }, [])
+
+    const routeList = useMemo(() => {
+        console.log("memo")
+        return _.uniq(_.map(routes, route => route.route))
+    }, [routes])
 
     return (
         <div className="rounded-xl m-3 w-1/5 bg-slate-800">
@@ -25,13 +37,9 @@ const QuerySidebar = props => {
                 <p className="mx-3 font-bold">輸入巴士路線</p>
             </div>
             <hr className="mx-3 my-1" />
-            <input
-                className="capitalize mx-3 my-2 w-20 text-sm ring-2 ring-cyan-600 rounded-sm caret-sky-600 
-                focus:ring-2 focus:ring-sky-800 focus:outline-none"
-                onBlur={e => updateInput(e)}
-            />
-            <NormalButton value="Search" onClick={findRoute} />
 
+            <NormalInput optionList={routeList} onBlur={updateInput} />
+            <NormalButton value="Search" onClick={findRoute} />
         </div >
     )
 }
