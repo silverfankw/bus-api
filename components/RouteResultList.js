@@ -1,6 +1,5 @@
-import { searchRouteStop, translateStop } from "../api/request"
+import { useEffect } from "react"
 import { companyMap } from "../util/mapper"
-import Spinner from "./Spinner"
 
 const RouteResultList = props => {
     const { language, routeResult, setStopIDs } = props
@@ -8,6 +7,12 @@ const RouteResultList = props => {
     const searchRouteInfo = async selectedRecord => {
         setStopIDs(selectedRecord.stops[selectedRecord.co[0]])
     }
+
+    // useEffect(() => {
+    //     console.log(routeResult.map(
+    //         route => `${route?.co}-${route?.route}: ${route?.orig?.zh} - ${route?.dest?.zh}`
+    //     ))
+    // }, [routeResult])
 
     return (
         <div className="container">

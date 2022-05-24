@@ -7,10 +7,6 @@ const NormalTextArea = props => {
 
     const { placeholder, value, disabled, rows, style } = props
 
-    // useEffect(() => {
-    //     console.log(height)
-    // }, [value])
-
     return (
         <textarea
             className={`resize-none
