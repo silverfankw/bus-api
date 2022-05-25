@@ -3,7 +3,7 @@ import { memo } from "react"
 const NormalInput = props => {
     const { optionList, onChange, onBlur, value } = props
 
-    const keypressHandler = e => { if (e?.code == "Enter") e.target.blur() }
+    const keypressHandler = e => { if (e?.code == "Enter" || e?.code == "NumpadEnter") e.target.blur() }
 
     // console.log(optionList)
 
