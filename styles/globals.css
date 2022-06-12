@@ -31,4 +31,12 @@ a {
   .hover-tr {
     @apply hover:bg-slate-500 hover:cursor-pointer
   }
+
+  .mouse-hover {
+    @apply hover:cursor-pointer
+  }
+
+  .mouse-help {
+    @apply hover:cursor-help
+  }
 }

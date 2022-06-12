@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { companyMap } from "../util/mapper"
 
 const RouteResultList = props => {
-    const { language, routeResult, setStopIDs } = props
+    const { routeResult, setStopIDs } = props
 
     const searchRouteInfo = async selectedRecord => {
         setStopIDs(selectedRecord.stops[selectedRecord.co[0]])

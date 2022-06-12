@@ -13,20 +13,21 @@ import RadioButton from "./RadioButton"
 
 const RadioSelectors = props => {
 
-    const { label, option } = props
+    const { label, option, modalHandler } = props
 
     return (
-        <div className="flex mx-3 mt-2">
-            {/* Radio label to indicate what value will be set */}
-            {<label className="text-white sm:text-sm mr-2">{label}</label>}
-
+        <>
+            <div className="flex mx-3 mt-4">
+                {/* Radio label to indicate what value will be set */}
+                <label className={`text-white sm:text-sm mr-2 ${modalHandler && `cursor-help`}`} onMouseOver={modalHandler} onMouseOut={modalHandler}>{label}</label>
+            </div>
             {/* Dynamically generated radio button based on option passed */}
-            <div className="flex">
+            <div className="flex mt-1 mx-2">
                 {option?.map((o, i) => (
                     <RadioButton key={`radio-${i}`} label={o?.label} name={o?.name} value={o?.value} checked={o?.checked ?? false} onChange={o?.onChange} />
                 ))}
             </div>
-        </div>
+        </>
     )
 }
 
