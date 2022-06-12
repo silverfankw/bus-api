@@ -43,8 +43,8 @@ const RouteResultList = props => {
                                             {record.co.map(co => companyMap[co])}</td>
                                         <td key={`route-result-${index}-route`}
                                             className={`${record.serviceType !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
-                                        <td key={`route-result-${index}-name_tc`}>{record.orig[language]}</td>
-                                        <td key={`route-result-${index}-dest_tc`}>{record.dest[language]}</td>
+                                        <td key={`route-result-${index}-name_tc`}>{record.orig["zh"]}</td>
+                                        <td key={`route-result-${index}-dest_tc`}>{record.dest["zh"]}</td>
                                     </tr>
                                 )
                             })
