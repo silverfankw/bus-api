@@ -17,7 +17,7 @@ const NormalTextArea = props => {
             // ref={textAreaElem}
             value={value}
             disabled={disabled}
-            rows={rows}
+            rows={40}
         ></textarea >
     )
 }

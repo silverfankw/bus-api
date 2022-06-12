@@ -13,7 +13,7 @@ const QuerySidebar = props => {
     const updateInput = e => setUserInput(e.target.value.trim().toUpperCase())
 
     const findRoute = () => setRouteResult(routeList.filter(route => route.route === userInput))
-    
+
     return (
         <div className="rounded-xl m-3 w-1/5 bg-slate-800">
             <div className="mt-2 text-white">
@@ -21,7 +21,7 @@ const QuerySidebar = props => {
             </div>
             <hr className="mx-3 my-1" />
 
-            <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput}/>
+            <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
             <NormalButton value="Search" onClick={findRoute} />
         </div >
     )

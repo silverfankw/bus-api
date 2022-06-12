@@ -37,7 +37,6 @@ const RouteResultList = props => {
                                 <td> {"-"} </td>
                             </tr> :
                             routeResult.map((record, index) => {
-                                // console.log(record)
                                 return (
                                     <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
                                         <td key={`route-result-${index}-cmp`}>
