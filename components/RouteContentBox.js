@@ -1,10 +1,11 @@
 import NormalButton from "./common/NormalButton"
 import NormalTextArea from "./common/NormalTextArea"
 
+import { FormattedMessage } from 'react-intl';
 import { useState, useEffect, memo } from "react"
 
 const RouteContentBox = props => {
-    const { stopIDs, stopList, language, displayOption } = props
+    const { stopIDs, stopList, resultLanguage, resultDisplayStyle } = props
 
     const [formattedStopInfo, setFormattedStopInfo] = useState("")
 
@@ -15,25 +16,25 @@ const RouteContentBox = props => {
     useEffect(() => {
         let formatted = ""
         stopIDs.forEach((stop, index) => {
-            if (index == stopIDs.length - 1 && language === "comb")
+            if (index == stopIDs.length - 1 && resultLanguage === "comb")
                 formatted = formatted.concat(`${stopList[stop].name["zh"]} ${stopList[stop].name["en"]}`)
-            else if (language === "comb")
+            else if (resultLanguage === "comb")
                 formatted = formatted.concat(`${stopList[stop].name["zh"]} ${stopList[stop].name["en"]}\n`)
             else if (index == stopIDs.length - 1)
-                formatted = formatted.concat(stopList[stop].name[language])
-            else if (displayOption === "single")
-                formatted = formatted.concat(`${stopList[stop].name[language]}\n`)
-            else if (displayOption === "multi")
-                formatted = formatted.concat(`${stopList[stop].name[language]} → ${stopList[stopIDs[index + 1]].name[language]}\n`)
+                formatted = formatted.concat(stopList[stop].name[resultLanguage])
+            else if (resultDisplayStyle === "single")
+                formatted = formatted.concat(`${stopList[stop].name[resultLanguage]}\n`)
+            else if (resultDisplayStyle === "multi")
+                formatted = formatted.concat(`${stopList[stop].name[resultLanguage]} → ${stopList[stopIDs[index + 1]].name[resultLanguage]}\n`)
         })
         setFormattedStopInfo(formatted)
-    }, [stopIDs, language, displayOption])
+    }, [stopIDs, resultLanguage, resultDisplayStyle])
 
     return (
         <div className="container">
             <div className="flex mt-2">
-                <p className="mx-4 font-bold">站位資料</p>
-                <NormalButton value="Copy" onClick={copyTextContent} style="mb-1" />
+                <p className="mx-4 font-bold"><FormattedMessage id="label--stop-info" /></p>
+                <NormalButton value="button--copy" onClick={copyTextContent} />
             </div>
             <NormalTextArea
                 placeholder="No data"

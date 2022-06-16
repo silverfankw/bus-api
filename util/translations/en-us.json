@@ -1,0 +1,24 @@
+{
+    "button--search": "Search",
+    "button--copy": "Copy to clipboard",
+
+    "header--title": "Youtube Chapter Generator for Hong Kong Bus Routes",
+    "header--subtitle": "Create youtube chapter for your bus trip video in just few steps!",
+    "label--enter-bus-route": "Enter bus route",
+    "label--result-display-language": "Result display language",
+    "label--chinese": "Chinese",
+    "label--english": "English",
+    "label--ch-en-combination": "Chinese + English",
+    "label--result-display-style": "Result display style",
+    "label--this-stop-only": "Single stop",
+    "label--this-and-next-stop": "This and next stop",
+    "hint--this-and-next-stop": "（KMB 38 as an example）\n＊Single Stop：\n\tPing Tin\n\tPing Tin Street\n\tLam Tin (North)\n\t...\n\n＊This and next stop：\n\tPing Tin → Ping Tin Street\n\tPing Tin Street → Lam Tin (North)\n\t...",
+
+    "label--search-result": "Search Result",
+    "label--bus-company": "Company",
+    "label--bus-route": "Route",
+    "label--departure": "Departure",
+    "label--destination": "Destination",
+
+    "label--stop-info": "Stops Info"
+}
