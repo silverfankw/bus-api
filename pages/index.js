@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react"
-import { IntlProvider, FormattedMessage } from "react-intl";
+import { IntlProvider } from "react-intl";
 import message_en from '../util/translations/en-us';
 import message_zh from '../util/translations/zh-hk';
 import _ from "lodash"
@@ -8,9 +8,9 @@ import { capitalize } from "../util/util"
 import QuerySidebar from "../components/QuerySidebar"
 import RouteContentBox from "../components/RouteContentBox"
 import RouteResultList from "../components/RouteResultList"
+import Header from "../components/common/header";
 
 import { getBusDB } from "../api/request"
-import NormalButton from "../components/common/NormalButton";
 
 export default function Home() {
   const [language, setLanguage] = useState("zh")
@@ -59,29 +59,9 @@ export default function Home() {
 
   return (
     <IntlProvider locale={language} messages={messages[language]}>
-      <div className="flex h-25 bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
-        <div className="rounded-full mx-3 mt-3 w-screen bg-gradient-to-r from-neutral-600 to-slate-900">
 
-          <div className="flex mt-1 justify-center text-white sm:text-2xl font-bold">
-            <FormattedMessage id="header--title" />
-          </div>
-          <div className="flex mt-1 justify-center text-white sm:text-sm font-medium">
-            <FormattedMessage id="header--subtitle" />
-          </div>
-          <div className="flex h-5 justify-end">
-            <div className={`border border-solid border-neutral-700 rounded-md mx-1 ${language === `en` ? `bg-emerald-700` : `hover:border-neutral-300 mouse-hover`}`}
-              onClick={() => setLanguage("en")}>
-              <p className="text-white sm:text-xs mx-2">English</p>
-            </div>
-            <div className={`border border-solid border-neutral-700 rounded-md mx-1  ${language === `zh` ? `bg-emerald-700` : `hover:border-neutral-300 mouse-hover`}`}
-              onClick={() => setLanguage("zh")}>
-              <p className="text-white sm:text-xs mx-2">繁體中文</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-      <div className="flex h-screen bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
+      <Header language={language} setLanguage={setLanguage} />
+      <div className="flex bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
         <QuerySidebar resultLanguage={resultLanguage} setResultLanguage={setResultLanguage}
           resultDisplayStyle={resultDisplayStyle} setResultDisplayStyle={setResultDisplayStyle}
           routeList={routeList} setRouteResult={setRouteResult} />

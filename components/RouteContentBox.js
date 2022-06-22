@@ -32,9 +32,9 @@ const RouteContentBox = props => {
 
     return (
         <div className="container">
-            <div className="flex mt-2">
+            <div className="flex mt-3">
                 <p className="mx-4 font-bold"><FormattedMessage id="label--stop-info" /></p>
-                <NormalButton value="button--copy" onClick={copyTextContent} />
+                <NormalButton label="button--copy" style="button" onClick={copyTextContent} />
             </div>
             <NormalTextArea
                 placeholder="No data"

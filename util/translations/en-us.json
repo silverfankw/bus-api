@@ -4,6 +4,8 @@
 
     "header--title": "Youtube Chapter Generator for Hong Kong Bus Routes",
     "header--subtitle": "Create youtube chapter for your bus trip video in just few steps!",
+    "header--language-zh": "繁體中文",
+    "header--language-en": "English",
     "label--enter-bus-route": "Enter bus route",
     "label--result-display-language": "Result display language",
     "label--chinese": "Chinese",

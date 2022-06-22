@@ -4,6 +4,8 @@
 
     "header--title": "Youtube巴士路線片段影片章節製作器",
     "header--subtitle": "輕鬆拎路線分站做chapter！" ,
+    "header--language-zh": "繁體中文",
+    "header--language-en": "English",
     "label--enter-bus-route": "輸入巴士路線",
     "label--result-display-language": "站位結果語言",
     "label--chinese": "中文",

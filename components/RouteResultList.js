@@ -40,7 +40,7 @@ const RouteResultList = props => {
                                 return (
                                     <tr key={`route-result-${index}`} className="hover-tr" onClick={e => searchRouteInfo(record)}>
                                         <td key={`route-result-${index}-cmp`}>
-                                            {record.co.map(co => companyMap[co])}</td>
+                                            {record.co.map((co, i) => i != record.co.length - 1 ? `${companyMap[co]} 及 ` : companyMap[co])}</td>
                                         <td key={`route-result-${index}-route`}
                                             className={`${record.serviceType !== '1' ? `after:content-['特班'] after:ml-1 after:text-red-500` : ``}`}>{record?.route}</td>
                                         <td key={`route-result-${index}-name_tc`}>{record.orig["zh"]}</td>
