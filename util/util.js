@@ -1,3 +1,5 @@
 import _ from "lodash"
 
-export const capitalize = str => str.replace(/\w+/g, _.capitalize)
+const regex = { capitalizeFirst: /\B[A-Z]|('S)/g }
+
+export const capitalize = str => str.replace(regex.capitalizeFirst, matchChar => matchChar.toLowerCase())
