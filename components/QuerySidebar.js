@@ -4,7 +4,6 @@ import _ from "lodash"
 
 import NormalButton from "./common/NormalButton"
 import NormalInput from "./common/NormalInput"
-import RadioSelectors from "./common/RadioSelectors"
 import ButtonSelectors from "./common/ButtonSelectors";
 
 const QuerySidebar = props => {
@@ -37,7 +36,7 @@ const QuerySidebar = props => {
             <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
             <NormalButton style="button" label="button--search" onClick={findRoute} />
             <ButtonSelectors labelId="label--result-display-language" style="button-set py-1" option={language_option} />
-            <RadioSelectors labelId="label--result-display-style" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
+            <ButtonSelectors labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
 
             {openModal &&
                 <div className="relative w-auto my-3 mx-2 max-w-1xl">

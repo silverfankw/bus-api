@@ -73,6 +73,6 @@ a {
     hover:ring-sky-300/80  
     hover:scale-110 
     duration-500
-    hover:font-semibold
+    /* hover:font-semibold */
   }
 }

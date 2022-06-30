@@ -8,17 +8,18 @@ const NormalTextArea = props => {
     const { placeholder, value, disabled, rows, style } = props
 
     return (
-        <textarea
-            className={`resize-none
+        <div className="mx-3">
+            <textarea
+                className={`resize-none bg-gray-600	
                 placeholder:italic placeholder:text-slate-400 
-                rounded-lg mx-3 my-2 pl-2 pt-1 w-11/12 
+                rounded-lg my-2 pl-2 pt-1 w-full  col
                 text-sm ${style}`}
-            placeholder={placeholder}
-            // ref={textAreaElem}
-            value={value}
-            disabled={disabled}
-            rows={40}
-        ></textarea >
+                placeholder={placeholder}
+                value={value}
+                disabled={disabled}
+                rows={40}
+            ></textarea >
+        </div>
     )
 }
 
