@@ -8,7 +8,7 @@ import { capitalize } from "../util/util"
 import QuerySidebar from "../components/QuerySidebar"
 import RouteContentBox from "../components/RouteContentBox"
 import RouteResultList from "../components/RouteResultList"
-import Header from "../components/common/header";
+import Header from "../components/common/Header";
 
 import { getBusDB } from "../api/request"
 
