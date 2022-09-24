@@ -17,10 +17,10 @@
     "hint--this-and-next-stop": "（以九巴路線296C為例）\n＊單站顯示：\n\t尚德總站\n\t唐明街公園\n\t將軍澳隧道轉車站 (G2)\n\t創紀之城 (B8)\n\t...\n\n＊顯示本站與下站：\n\t尚德總站 → 唐明街公園\n\t唐明街公園 → 將軍澳隧道轉車站 (G2)\n\t將軍澳隧道轉車站 (G2) → 創紀之城 (B8)\n\t...",
 
     "label--search-result": "搜尋結果",
-    "label--bus-company": "公司",
+    "label--bus-company": "營辦公司",
     "label--bus-route": "路線",
-    "label--departure": "起點",
-    "label--destination": "終點",
+    "label--departure": "起點站",
+    "label--destination": "終點站",
 
     "label--stop-info": "站位資料"
 }

@@ -2,7 +2,7 @@ import { useState, useMemo } from "react"
 import { FormattedMessage } from 'react-intl';
 import _ from "lodash"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faSearch } from '@fortawesome/fontawesome-free-solid'
+import { faBus, faSearch, faLanguage, faList } from '@fortawesome/fontawesome-free-solid'
 
 import NormalButton from "./common/NormalButton"
 import NormalInput from "./common/NormalInput"
@@ -39,8 +39,8 @@ const QuerySidebar = props => {
 
             <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
             <NormalButton style="button" label="button--search" onClick={findRoute} />
-            <ButtonSelectors labelId="label--result-display-language" style="button-set py-1" option={language_option} />
-            <ButtonSelectors labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
+            <ButtonSelectors labelIcon={faLanguage} labelId="label--result-display-language" style="button-set py-1" option={language_option} />
+            <ButtonSelectors labelIcon={faList} labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
 
             {openModal &&
                 <div className="relative w-auto my-3 mx-2 max-w-1xl">

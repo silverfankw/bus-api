@@ -5,7 +5,7 @@ export const LWB_EXTERNAL_ROUTE = [
     "E31", "E32", "E32A", "E33", "E33P", "E36", "E36A", "E36P", "E36S",
     "E37", "E37C", "E41", "E42", "E42C", "E42P", "E43"]
 
-export const LWB_LANTAU_S_ROUTE = ["S1", "S64", "S64C", "S64P", "S64X", "S65"]
+export const LWB_LANTAU_ROUTE = ["R8", "S1", "S64", "S64C", "S64P", "S64X", "S65"]
 
 export const LWB_OVERNIGHT_ROUTE = ["NA31", "NA32", "NA33", "NA36", "NA37", "NA40", "NA41", "NA43", "NA47"]
 
@@ -27,4 +27,6 @@ export const CITYFLYER_ROUTE = [
 
 export const NLB_OVERNIGHT_ROUTE = ["N1", "N35", "N37", "N38"]
 
-export const EXCLUSION_FOR_RED_BG = ["347", "388", "389", "629"]
+export const EXCLUSION_FOR_RED_BG = ["347", "388", "389", "629", "629M"]
+
+export const LWB_EVENT_ROUTE = ["R33", "R42", "X33", "X36", "X40", "X43"]

@@ -1,17 +1,20 @@
 import { FormattedMessage } from "react-intl";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+
 import NormalButton from "./NormalButton";
 
 const ButtonSelectors = props => {
 
-    const { labelId, option, style, modalHandler } = props
+    const { labelIcon, labelId, option, style, modalHandler } = props
 
     return (
         <>
             {
                 labelId &&
-                <div className="flex mx-3 mt-4">
+                <div className="flex mx-3 my-2 mt-4">
                     {/* Radio label to indicate what value will be set */}
-                    <label className={`text-white sm:text-sm mr-2 font-bold ${modalHandler && `cursor-help`}`} onMouseOver={modalHandler} onMouseOut={modalHandler}>
+                    <FontAwesomeIcon className="my-0.5" icon={labelIcon} />
+                    <label className={`text-white sm:text-sm ml-2 font-bold ${modalHandler && `cursor-help`}`} onMouseOver={modalHandler} onMouseOut={modalHandler}>
                         <FormattedMessage id={labelId} /></label>
                 </div>
             }

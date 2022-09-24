@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faListAlt } from '@fortawesome/fontawesome-free-solid'
+import { faListAlt, faPlayCircle, faFlagCheckered, faSign, faBuilding } from '@fortawesome/fontawesome-free-solid'
 
 
 import { companyMap } from "../util/mapper"
@@ -31,10 +31,10 @@ const RouteResultList = props => {
                 <table className="table-auto mx-3 w-11/12 text-sm">
                     <thead>
                         <tr>
-                            <th className="normal-th"><FormattedMessage id="label--bus-company" /></th>
-                            <th className="normal-th px-2"><FormattedMessage id="label--bus-route" /></th>
-                            <th className="normal-th"><FormattedMessage id="label--departure" /></th>
-                            <th className="normal-th"><FormattedMessage id="label--destination" /></th>
+                            <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faBuilding} /><FormattedMessage id="label--bus-company" /></th>
+                            <th className={`normal-th ${!routeResult.length && `px-2`}`}><FontAwesomeIcon className="mr-1" icon={faSign} /><FormattedMessage id="label--bus-route" /></th>
+                            <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faPlayCircle} /><FormattedMessage id="label--departure" /></th>
+                            <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faFlagCheckered} /><FormattedMessage id="label--destination" /></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -51,7 +51,7 @@ const RouteResultList = props => {
                                         <td key={`route-result-${index}-cmp`}>
                                             {record.co.map((co, i) => i != record.co.length - 1 ? `${companyMap[co]} 及 ` : companyMap[co])}</td>
                                         <td key={`route-result-${index}-route`}
-                                            className={`${record.serviceType !== '1' && record.co == "kmb" ? `after:content-['特班'] after:text-red-500` : ``}`}
+                                            className={`${record.serviceType !== '1' && record.co == "kmb" ? `after:content-['特班'] after:ml-0.5 after:text-red-500 after:font-bold` : ``}`}
                                         >
                                             <RouteDecorator details={record} />
                                         </td>
