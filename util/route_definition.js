@@ -24,3 +24,7 @@ export const NWFB_OVERNIGHT_ROUTE = ["N8", "N8P", "N796"]
 export const CITYFLYER_ROUTE = [
     "A10", "A11", "A17", "A21", "A22", "A23", "A26", "A29", "A29P",
     "NA10", "NA11", "NA12", "NA20", "NA21", "NA29"]
+
+export const NLB_OVERNIGHT_ROUTE = ["N1", "N35", "N37", "N38"]
+
+export const EXCLUSION_FOR_RED_BG = ["347", "388", "389", "629"]

@@ -19,7 +19,7 @@ const ButtonSelectors = props => {
             {/* Dynamically generated radio button based on option passed */}
             <div className="flex mt-1 mx-2">
                 {option?.map((o, i) => (
-                    <NormalButton key={`button-${i}`} style={`border border-solid border-neutral-700 rounded-md mx-1 ${style} ${o.checked && `bg-green-700 font-bold`}`}
+                    <NormalButton key={`button-${i}`} style={`border-0.5 border-solid border-neutral-500 rounded-md mx-1 ${style} ${o.checked && `bg-green-700 font-bold`}`}
                         label={o?.labelId} value={o?.value} onClick={o?.onChange} modalHandler />
                 ))}
             </div>

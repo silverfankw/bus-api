@@ -1,8 +1,12 @@
+import { FormattedMessage } from 'react-intl';
+import { useState, useEffect, memo } from "react"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBus } from '@fortawesome/fontawesome-free-solid'
+
 import NormalButton from "./common/NormalButton"
 import NormalTextArea from "./common/NormalTextArea"
 
-import { FormattedMessage } from 'react-intl';
-import { useState, useEffect, memo } from "react"
+
 
 const RouteContentBox = props => {
     const { stopIDs, stopList, resultLanguage, resultDisplayStyle } = props
@@ -32,8 +36,9 @@ const RouteContentBox = props => {
 
     return (
         <div className="container">
-            <div className="flex mt-3">
-                <p className="mx-4 font-bold"><FormattedMessage id="label--stop-info" /></p>
+            <div className="flex ml-3 mt-2">
+                <FontAwesomeIcon className="ml-1 my-1" icon={faBus} />
+                <p className="mx-3 font-bold"><FormattedMessage id="label--stop-info" /></p>
                 <NormalButton label="button--copy" style="button" onClick={copyTextContent} />
             </div>
             <NormalTextArea

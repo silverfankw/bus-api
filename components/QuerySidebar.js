@@ -1,6 +1,8 @@
 import { useState, useMemo } from "react"
 import { FormattedMessage } from 'react-intl';
 import _ from "lodash"
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBus, faSearch } from '@fortawesome/fontawesome-free-solid'
 
 import NormalButton from "./common/NormalButton"
 import NormalInput from "./common/NormalInput"
@@ -27,9 +29,11 @@ const QuerySidebar = props => {
     ]
 
     return (
-        <div className="rounded-xl m-3 w-1/5 bg-slate-800">
-            <div className="mt-2 text-white">
-                <p className="mx-3 font-bold"><FormattedMessage id="label--enter-bus-route" /></p>
+        <div className="container rounded-xl m-3 w-1/5">
+            <div className="mt-2 mx-3 text-white">
+                <FontAwesomeIcon icon={faBus} />
+                <FontAwesomeIcon className="ml-2" icon={faSearch} />
+                <span className="mx-2 font-bold"><FormattedMessage id="label--enter-bus-route" /></span>
             </div>
             <hr className="mx-3 my-2" />
 

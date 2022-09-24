@@ -8,12 +8,17 @@ export const RouteDecorator = props => {
     // Black bg - White text
     const IS_OVERNIGHT_ROUTE = route.match(/(^N)(\d|[A-Z]){1,4}/)
 
+    // Black bg - Yellow text
+    const IS_NLB_OVERNIGHT_ROUTE = routeDef.NLB_OVERNIGHT_ROUTE.indexOf(route) > -1
+
     // Dark Blue bg - Yellow text
     const IS_CTB_NWFB_OVERNIGHT_ROUTE = [...routeDef.CTB_OVERNIGHT_ROUTE, ...routeDef.NWFB_OVERNIGHT_ROUTE].indexOf(route) > -1
 
     // Red bg - White text
     const IS_XHT_OR_EHC_ROUTE =
-        route.match(/(^1)(\d){2}([A-Z])?/) || route.match(/(^3)(\d){2}([A-Z])?/) || route.match(/(^6)(\d){2}([A-Z])?/) && route != 629
+        route.match(/(^1)(\d){2}([A-Z])?/) || route.match(/(^3)(\d){2}([A-Z])?/) || route.match(/(^6)(\d){2}([A-Z])?/)
+
+    const IS_RED_BG_EXCLUSION = routeDef.EXCLUSION_FOR_RED_BG.indexOf(route) > -1
 
     // Green bg - White text
     const IS_WHC_ROUTE = route.match(/(^9)(\d|[A-Z]){2,4}/) || routeDef.CTB_EXTERNAL_ROUTE_XHT.indexOf(route) > -1
@@ -35,19 +40,24 @@ export const RouteDecorator = props => {
             if (IS_REGULAR_ROUTE)
                 return <span className="px-2 py-0.5 font-bold">{route}</span>
         case "ctb":
-            if (IS_REGULAR_ROUTE)
+            if (IS_REGULAR_ROUTE || IS_RED_BG_EXCLUSION)
                 return <span className="bg-sky-500 text-white px-2 py-0.5 font-bold">{route}</span>
         case "nwfb":
-            if (IS_REGULAR_ROUTE)
+            if (IS_REGULAR_ROUTE || IS_RED_BG_EXCLUSION)
                 return <span className="bg-violet-900 text-white px-2 py-0.5 font-bold">{route}</span>
+        case "nlb":
+            if (IS_REGULAR_ROUTE)
+                return <span className="bg-[#000080] text-white px-2 py-0.5 font-bold">{route}</span>
+            else if (IS_NLB_OVERNIGHT_ROUTE)
+                return <span className="bg-black text-amber-300 px-2 py-0.5 font-bold">{route}</span>
             else if (IS_CTB_NWFB_OVERNIGHT_ROUTE)
                 return <span className="bg-[#291466] text-amber-300 px-2 py-0.5 font-bold">{route}</span>
-            else if (IS_OVERNIGHT_ROUTE)
-                return <span className="bg-black text-white px-2 py-0.5 font-bold">{route}</span>
-            else if (IS_XHT_OR_EHC_ROUTE || IS_CITYFLYER_OR_CTB_E_ROUTE)
+            else if ((IS_XHT_OR_EHC_ROUTE || IS_CITYFLYER_OR_CTB_E_ROUTE) && !IS_RED_BG_EXCLUSION)
                 return <span className="bg-red-700 px-2 py-0.5 font-bold">{route}</span>
             else if (IS_WHC_ROUTE)
-                return <span className="bg-green-900 px-2 py-0.5 font-bold">{route}</span>
+                return <span className="bg-green-700 px-2 py-0.5 font-bold">{route}</span>
+            else if (IS_OVERNIGHT_ROUTE)
+                return <span className="bg-black text-white px-2 py-0.5 font-bold">{route}</span>
             else if (IS_LWB_EXTERNAL_ROUTE)
                 return <span className="bg-amber-500 px-2 py-0.5 font-bold">{route}</span>
         default:

@@ -10,7 +10,7 @@ const NormalTextArea = props => {
     return (
         <div className="mx-3">
             <textarea
-                className={`resize-none bg-gray-600	
+                className={`resize-none bg-gray-600/[0.5]	
                 placeholder:italic placeholder:text-slate-400 
                 rounded-lg my-2 pl-2 pt-1 w-full  col
                 text-sm ${style}`}
