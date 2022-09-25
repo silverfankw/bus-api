@@ -1,3 +1,9 @@
+Project demo can viewed in (https://hk-bus-service.herokuapp.com/).
+
+Original idea for this project was to shorten the manual time defining Youtube chapter based on different bus route.
+
+
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
