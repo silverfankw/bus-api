@@ -21,11 +21,11 @@ a {
 
 @layer components {
   .container {
-    @apply rounded-xl m-3 text-white w-2/5 bg-sky-700/[0.15]
+    @apply rounded-xl m-3 text-white w-3/5 bg-sky-700/[0.15]
   }
 
   .normal-th{
-    @apply border-b text-left pb-1
+    @apply border-b text-left pb-1 font-normal
   }
 
   .selected-tr{

@@ -1,6 +1,7 @@
 {
     "button--search": "Search",
     "button--copy": "Copy to clipboard",
+    "button--copied": "Copied!",
 
     "header--title": "Youtube Chapter Generator for Hong Kong Bus Routes",
     "header--subtitle": "Create youtube chapter for your bus trip video in just few steps!",

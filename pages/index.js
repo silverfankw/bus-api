@@ -66,7 +66,7 @@ export default function Home() {
         <QuerySidebar resultLanguage={resultLanguage} setResultLanguage={setResultLanguage}
           resultDisplayStyle={resultDisplayStyle} setResultDisplayStyle={setResultDisplayStyle}
           routeList={routeList} setRouteResult={setRouteResult} numericDisplay={numericDisplay} setNumericDisplay={setNumericDisplay} />
-        <RouteResultList routeResult={routeResult} setStopIDs={setStopIDs} />
+        <RouteResultList routeResult={routeResult} setStopIDs={setStopIDs} language={language} />
         <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle} stopList={stopList} stopIDs={stopIDs} numericDisplay={numericDisplay} />
 
       </div>

@@ -38,27 +38,28 @@ const QuerySidebar = props => {
             <div className="mt-2 mx-3 text-white">
                 <FontAwesomeIcon icon={faBus} />
                 <FontAwesomeIcon className="ml-2" icon={faSearch} />
-                <span className="mx-2 font-bold"><FormattedMessage id="label--enter-bus-route" /></span>
+                <span className="mx-2"><FormattedMessage id="label--enter-bus-route" /></span>
             </div>
             <hr className="mx-3 my-2" />
 
-            <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
-            <NormalButton style="button" label="button--search" onClick={findRoute} />
-            <ButtonSelectors labelIcon={faLanguage} labelId="label--result-display-language" style="button-set py-1" option={language_option} />
-            <ButtonSelectors labelIcon={faList} labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
-            {openModal &&
-                <div className="relative w-auto my-3 mx-2 max-w-1xl z-10">
-                    <div className="border-1 rounded-lg shadow-lg flex w-full bg-neutral-500 ">
-                        <div className="relative p-3 flex-auto">
-                            <pre className="my-1 text-xs text-white ">
-                                {<FormattedMessage id={"hint--this-and-next-stop"} />}
-                            </pre>
+            <div className="ml-2">
+                <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
+                <NormalButton style="button" label="button--search" onClick={findRoute} />
+                <ButtonSelectors labelIcon={faLanguage} labelId="label--result-display-language" style="button-set py-1" option={language_option} />
+                <ButtonSelectors labelIcon={faList} labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
+                {openModal &&
+                    <div className="relative w-auto my-3 mx-2 max-w-1xl z-10">
+                        <div className="border-1 rounded-lg shadow-lg flex w-full bg-neutral-500 ">
+                            <div className="relative p-3 flex-auto">
+                                <pre className="my-1 text-xs text-white ">
+                                    {<FormattedMessage id={"hint--this-and-next-stop"} />}
+                                </pre>
+                            </div>
                         </div>
                     </div>
-                </div>
-            }
-            <ButtonSelectors labelIcon={faSortNumericDown} labelId="label--numeric-expression" style="button-set py-1" option={numeric_option} />
-
+                }
+                <ButtonSelectors labelIcon={faSortNumericDown} labelId="label--numeric-expression" style="button-set py-1" option={numeric_option} />
+            </div>
 
         </div >
     )

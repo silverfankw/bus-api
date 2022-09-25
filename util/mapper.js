@@ -4,5 +4,6 @@ export const companyMap = {
     "nwfb": "新巴",
     "nlb": "嶼巴",
     "gmb": "綠色專線小巴",
+    "lrtfeeder": "港鐵巴士"
 }
 
