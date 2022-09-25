@@ -30,3 +30,5 @@ export const NLB_OVERNIGHT_ROUTE = ["N1", "N35", "N37", "N38"]
 export const EXCLUSION_FOR_RED_BG = ["347", "388", "389", "629", "629M"]
 
 export const LWB_EVENT_ROUTE = ["R33", "R42", "X33", "X36", "X40", "X43"]
+
+export const XHT_EVENT_ROUTE = ["R108", "R307", "R603", "R673", "R678", "R680", "R930", "R934", "R936", "R948", "R960", "R961", "R962", "R968", "R969"]

@@ -57,7 +57,7 @@ const RouteResultList = props => {
                                                 {record.co.map((co, i) => constructCompanyName(co, i == record.co.length - 1))}</td>
 
                                             <td key={`route-result-${index}-route`}
-                                                className={`${record.serviceType !== '1' && record.co == "kmb" ? `after:content-['特班'] after:ml-0.5 after:text-red-500 after:font-bold` : ``}`}
+                                                className={`route-num ${record.serviceType !== '1' && record.co == "kmb" ? `after:content-['特班'] after:ml-0.5 after:text-red-500 after:font-bold` : ``}`}
                                             >
                                                 <RouteDecorator details={record} />
                                             </td>
