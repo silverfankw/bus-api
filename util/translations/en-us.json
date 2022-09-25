@@ -15,6 +15,9 @@
     "label--this-stop-only": "Single stop",
     "label--this-and-next-stop": "This and next stop",
     "hint--this-and-next-stop": "（KMB 38 as an example）\n＊Single Stop：\n\tPing Tin\n\tPing Tin Street\n\tLam Tin (North)\n\t...\n\n＊This and next stop：\n\tPing Tin → Ping Tin Street\n\tPing Tin Street → Lam Tin (North)\n\t...",
+    "label--numeric-expression": "Display bus stop numeric order",
+    "label--show": "Show",
+    "label--hide": "Hide",
 
     "label--search-result": "Search Result",
     "label--bus-company": "Company",

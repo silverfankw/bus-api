@@ -2,14 +2,14 @@ import { useState, useMemo } from "react"
 import { FormattedMessage } from 'react-intl';
 import _ from "lodash"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBus, faSearch, faLanguage, faList } from '@fortawesome/fontawesome-free-solid'
+import { faBus, faSearch, faLanguage, faList, faSortNumericDown } from '@fortawesome/fontawesome-free-solid'
 
 import NormalButton from "./common/NormalButton"
 import NormalInput from "./common/NormalInput"
 import ButtonSelectors from "./common/ButtonSelectors";
 
 const QuerySidebar = props => {
-    const { routeList, setRouteResult, resultLanguage, setResultLanguage, resultDisplayStyle, setResultDisplayStyle } = props
+    const { routeList, setRouteResult, resultLanguage, setResultLanguage, resultDisplayStyle, setResultDisplayStyle, numericDisplay, setNumericDisplay } = props
     const [userInput, setUserInput] = useState("")
     const [openModal, setOpenModal] = useState(false)
 
@@ -28,6 +28,11 @@ const QuerySidebar = props => {
         { name: "display", labelId: "label--this-and-next-stop", value: "multi", checked: resultDisplayStyle === "multi", onChange: () => setResultDisplayStyle("multi") }
     ]
 
+    const numeric_option = [
+        { name: "display", labelId: "label--show", value: true, checked: numericDisplay === true, onChange: () => setNumericDisplay(true) },
+        { name: "display", labelId: "label--hide", value: false, checked: numericDisplay === false, onChange: () => setNumericDisplay(false) }
+    ]
+
     return (
         <div className="container rounded-xl m-3 w-1/5">
             <div className="mt-2 mx-3 text-white">
@@ -41,9 +46,8 @@ const QuerySidebar = props => {
             <NormalButton style="button" label="button--search" onClick={findRoute} />
             <ButtonSelectors labelIcon={faLanguage} labelId="label--result-display-language" style="button-set py-1" option={language_option} />
             <ButtonSelectors labelIcon={faList} labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
-
             {openModal &&
-                <div className="relative w-auto my-3 mx-2 max-w-1xl">
+                <div className="relative w-auto my-3 mx-2 max-w-1xl z-10">
                     <div className="border-1 rounded-lg shadow-lg flex w-full bg-neutral-500 ">
                         <div className="relative p-3 flex-auto">
                             <pre className="my-1 text-xs text-white ">
@@ -53,6 +57,9 @@ const QuerySidebar = props => {
                     </div>
                 </div>
             }
+            <ButtonSelectors labelIcon={faSortNumericDown} labelId="label--numeric-expression" style="button-set py-1" option={numeric_option} />
+
+
         </div >
     )
 }

@@ -20,6 +20,7 @@ export default function Home() {
   const [stopList, setStopList] = useState({})
   const [stopIDs, setStopIDs] = useState([])
 
+  const [numericDisplay, setNumericDisplay] = useState(false)
   const [resultLanguage, setResultLanguage] = useState("comb")
   const [resultDisplayStyle, setResultDisplayStyle] = useState("multi")
 
@@ -64,9 +65,9 @@ export default function Home() {
       <div className="flex bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
         <QuerySidebar resultLanguage={resultLanguage} setResultLanguage={setResultLanguage}
           resultDisplayStyle={resultDisplayStyle} setResultDisplayStyle={setResultDisplayStyle}
-          routeList={routeList} setRouteResult={setRouteResult} />
+          routeList={routeList} setRouteResult={setRouteResult} numericDisplay={numericDisplay} setNumericDisplay={setNumericDisplay} />
         <RouteResultList routeResult={routeResult} setStopIDs={setStopIDs} />
-        <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle} stopList={stopList} stopIDs={stopIDs} />
+        <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle} stopList={stopList} stopIDs={stopIDs} numericDisplay={numericDisplay} />
 
       </div>
     </IntlProvider>
