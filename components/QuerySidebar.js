@@ -44,7 +44,7 @@ const QuerySidebar = props => {
 
             <div className="ml-2">
                 <NormalInput optionList={routes} onChange={updateInput} onBlur={findRoute} value={userInput} />
-                <NormalButton style="button" label="button--search" onClick={findRoute} />
+                <NormalButton style="button ml-1 p-3 w-20" label="button--search" onClick={findRoute} />
                 <ButtonSelectors labelIcon={faLanguage} labelId="label--result-display-language" style="button-set py-1" option={language_option} />
                 <ButtonSelectors labelIcon={faList} labelId="label--result-display-style" style="button-set py-1" option={display_option} modalHandler={() => setOpenModal(!openModal)} />
                 {openModal &&

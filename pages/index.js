@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useReducer } from "react"
 import { IntlProvider } from "react-intl";
 import message_en from '../util/translations/en-us';
 import message_zh from '../util/translations/zh-hk';
@@ -13,6 +13,23 @@ import Header from "../components/common/Header";
 import { getBusDB } from "../api/request"
 
 export default function Home() {
+
+  // const [state, dispatch] = useReducer((state, action) => {
+  //   switch (action.type) {
+  //     case "SET_LANGUAGE":
+  //       return { ...state, language: action.language }
+  //   }
+  // }, {
+  //   language: "zh",
+  //   numericDisplay: false,
+  //   resultLanguage: "comb",
+  //   resultDisplayStyle: "multi",
+  //   routeResult: [],
+  //   routeList: [],
+  //   stopList: [],
+  //   stopIDs: [],
+  // })
+
   const [language, setLanguage] = useState("zh")
 
   const [routeResult, setRouteResult] = useState([])
