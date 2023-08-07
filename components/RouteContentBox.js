@@ -6,8 +6,6 @@ import { faBus, faCopy, faCheck } from '@fortawesome/fontawesome-free-solid'
 import NormalButton from "./common/NormalButton"
 import NormalTextArea from "./common/NormalTextArea"
 
-
-
 const RouteContentBox = props => {
     const { stopIDs, stopList, resultLanguage, resultDisplayStyle, numericDisplay } = props
 

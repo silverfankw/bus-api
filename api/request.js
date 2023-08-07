@@ -1,6 +1,3 @@
-// import _ from "lodash"
-import { capitalize } from "../util/util"
-
 import {
     ENDPOINT_HK_BUS_CRAWLER
 } from "../api/const"

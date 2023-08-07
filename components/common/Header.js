@@ -1,13 +1,25 @@
 import { FormattedMessage } from "react-intl"
+import { useDispatch } from "react-redux";
+import { setLanguage } from "../../features/webConfig/webConfigSlice"
 import ButtonSelectors from "./ButtonSelectors";
 
 const Header = props => {
 
-    const { language, setLanguage } = props
+    const { language } = props
+
+    const dispatch = useDispatch()
 
     const language_option = [
-        { name: "site-language", labelId: "header--language-zh", value: "zh", checked: language === "zh", onChange: () => setLanguage("zh") },
-        { name: "site-language", labelId: "header--language-en", value: "en", checked: language === "en", onChange: () => setLanguage("en") }
+        // Set to Chinese
+        {
+            name: "site-language", labelId: "header--language-zh", value: "zh",
+            checked: language === "zh", onChange: () => dispatch(setLanguage("zh"))
+        },
+        // Set to English
+        {
+            name: "site-language", labelId: "header--language-en", value: "en",
+            checked: language === "en", onChange: () => dispatch(setLanguage("en"))
+        }
     ]
 
     return (
@@ -31,5 +43,4 @@ const Header = props => {
     )
 }
 
-{ result_lang: "chi" / "eng" }
 export default Header

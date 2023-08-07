@@ -2,19 +2,23 @@ import { useState, useEffect } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faListAlt, faPlayCircle, faFlagCheckered, faSign, faBuilding } from '@fortawesome/fontawesome-free-solid'
 
+import { FormattedMessage } from 'react-intl';
+import { useDispatch } from "react-redux";
+import { setStopIDs } from "../features/routeInfo/routeInfoSlice";
 
 import { companyMap } from "../util/mapper"
-import { FormattedMessage } from 'react-intl';
 import { RouteDecorator } from "./common/RouteDecorator"
 
 const RouteResultList = props => {
-    const { routeResult, setStopIDs, language } = props
+    const { routeResult, language } = props
+
+    const dispatch = useDispatch()
 
     const [selectedIndex, setSelectedIndex] = useState(null)
 
     const searchRouteInfo = async selectedRecord => {
         const availableCompany = Object.keys(selectedRecord.stops)[0]
-        setStopIDs(selectedRecord.stops[availableCompany])
+        dispatch(setStopIDs(selectedRecord.stops[availableCompany]))
     }
 
     useEffect(() => {
@@ -36,7 +40,7 @@ const RouteResultList = props => {
                         <thead>
                             <tr>
                                 <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faBuilding} /><FormattedMessage id="label--bus-company" /></th>
-                                <th className={`normal-th ${!routeResult.length && `px-2`}`}><FontAwesomeIcon className="mr-1" icon={faSign} /><FormattedMessage id="label--bus-route" /></th>
+                                <th className={`normal-th `}><FontAwesomeIcon className="mr-1" icon={faSign} /><FormattedMessage id="label--bus-route" /></th>
                                 <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faPlayCircle} /><FormattedMessage id="label--departure" /></th>
                                 <th className="normal-th"><FontAwesomeIcon className="mr-1" icon={faFlagCheckered} /><FormattedMessage id="label--destination" /></th>
                             </tr>

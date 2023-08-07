@@ -1,8 +1,18 @@
-import { useState, useEffect, useReducer } from "react"
+import { useState, useEffect } from "react"
 import { IntlProvider } from "react-intl";
+import _ from "lodash"
+
+import { useSelector, useDispatch } from "react-redux";
+import { selectLanguage } from "../features/webConfig/webConfigSlice"
+import {
+  selectRouteList, selectRouteResult, selectStopIDs, selectStopList,
+  setRouteList, setStopList
+} from "../features/routeInfo/routeInfoSlice"
+import { selectNumericDisplay, selectResultDisplayStyle, selectResultLanguage }
+  from "../features/resultDisplayConfig/resultDisplayConfigSlice";
+
 import message_en from '../util/translations/en-us';
 import message_zh from '../util/translations/zh-hk';
-import _ from "lodash"
 
 import { capitalize } from "../util/util"
 import QuerySidebar from "../components/QuerySidebar"
@@ -11,35 +21,23 @@ import RouteResultList from "../components/RouteResultList"
 import Header from "../components/common/Header";
 
 import { getBusDB } from "../api/request"
+import { route } from "next/dist/server/router";
+
 
 export default function Home() {
 
-  // const [state, dispatch] = useReducer((state, action) => {
-  //   switch (action.type) {
-  //     case "SET_LANGUAGE":
-  //       return { ...state, language: action.language }
-  //   }
-  // }, {
-  //   language: "zh",
-  //   numericDisplay: false,
-  //   resultLanguage: "comb",
-  //   resultDisplayStyle: "multi",
-  //   routeResult: [],
-  //   routeList: [],
-  //   stopList: [],
-  //   stopIDs: [],
-  // })
+  const language = useSelector(selectLanguage)
 
-  const [language, setLanguage] = useState("zh")
+  const routeList = useSelector(selectRouteList)
+  const routeResult = useSelector(selectRouteResult)
+  const stopList = useSelector(selectStopList)
+  const stopIDs = useSelector(selectStopIDs)
 
-  const [routeResult, setRouteResult] = useState([])
-  const [routeList, setRouteList] = useState([])
-  const [stopList, setStopList] = useState({})
-  const [stopIDs, setStopIDs] = useState([])
+  const numericDisplay = useSelector(selectNumericDisplay)
+  const resultLanguage = useSelector(selectResultLanguage)
+  const resultDisplayStyle = useSelector(selectResultDisplayStyle)
 
-  const [numericDisplay, setNumericDisplay] = useState(false)
-  const [resultLanguage, setResultLanguage] = useState("comb")
-  const [resultDisplayStyle, setResultDisplayStyle] = useState("multi")
+  const dispatch = useDispatch()
 
   const messages = {
     "zh": message_zh,
@@ -57,10 +55,13 @@ export default function Home() {
       }
     })
 
-    setStopList(updatedStops)
+    dispatch(setStopList(updatedStops))
   }
 
-  const processRouteList = resp => setRouteList(_.values(resp.routeList))
+  const processRouteList = resp => {
+    dispatch(setRouteList(_.values(resp.routeList)))
+    // console.log(routeList)
+  }
 
   const retrieveData = async () => {
     await getBusDB()
@@ -77,16 +78,15 @@ export default function Home() {
 
   return (
     <IntlProvider locale={language} messages={messages[language]}>
-
-      <Header language={language} setLanguage={setLanguage} />
+      <Header language={language} />
       <div className="flex bg-zinc-600 bg-gradient-to-r from-neutral-600 to-slate-900">
-        <QuerySidebar resultLanguage={resultLanguage} setResultLanguage={setResultLanguage}
-          resultDisplayStyle={resultDisplayStyle} setResultDisplayStyle={setResultDisplayStyle}
-          routeList={routeList} setRouteResult={setRouteResult} numericDisplay={numericDisplay} setNumericDisplay={setNumericDisplay} />
-        <RouteResultList routeResult={routeResult} setStopIDs={setStopIDs} language={language} />
-        <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle} stopList={stopList} stopIDs={stopIDs} numericDisplay={numericDisplay} />
-
+        <QuerySidebar routeList={routeList} resultLanguage={resultLanguage}
+          resultDisplayStyle={resultDisplayStyle} numericDisplay={numericDisplay} />
+        <RouteResultList routeResult={routeResult} language={language} />
+        <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle}
+          stopList={stopList} stopIDs={stopIDs} numericDisplay={numericDisplay} />
       </div>
     </IntlProvider>
+
   )
 }

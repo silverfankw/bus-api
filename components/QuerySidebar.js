@@ -1,6 +1,11 @@
 import { useState, useMemo } from "react"
 import { FormattedMessage } from 'react-intl';
 import _ from "lodash"
+import { useDispatch } from "react-redux";
+import { setRouteResult } from "../features/routeInfo/routeInfoSlice";
+import { setResultLanguage, setResultDisplayStyle, setNumericDisplay }
+    from "../features/resultDisplayConfig/resultDisplayConfigSlice";
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faBus, faSearch, faLanguage, faList, faSortNumericDown } from '@fortawesome/fontawesome-free-solid'
 
@@ -9,28 +14,30 @@ import NormalInput from "./common/NormalInput"
 import ButtonSelectors from "./common/ButtonSelectors";
 
 const QuerySidebar = props => {
-    const { routeList, setRouteResult, resultLanguage, setResultLanguage, resultDisplayStyle, setResultDisplayStyle, numericDisplay, setNumericDisplay } = props
+    const dispatch = useDispatch()
+
+    const { routeList, resultLanguage, resultDisplayStyle, numericDisplay } = props
     const [userInput, setUserInput] = useState("")
     const [openModal, setOpenModal] = useState(false)
 
     const routes = useMemo(() => _.uniq(_.map(_.values(_.mapValues(routeList)), route => route.route)), [routeList])
     const updateInput = e => setUserInput(e.target.value.trim().toUpperCase())
-    const findRoute = () => setRouteResult(routeList.filter(route => route.route === userInput))
+    const findRoute = () => dispatch(setRouteResult(routeList.filter(route => route.route === userInput)))
 
     const language_option = [
-        { name: "language", labelId: "label--chinese", value: "zh", checked: resultLanguage === "zh", onChange: () => setResultLanguage("zh") },
-        { name: "language", labelId: "label--english", value: "en", checked: resultLanguage === "en", onChange: () => setResultLanguage("en") },
-        { name: "language", labelId: "label--ch-en-combination", value: "comb", checked: resultLanguage === "comb", onChange: () => setResultLanguage("comb") }
+        { name: "language", labelId: "label--chinese", value: "zh", checked: resultLanguage === "zh", onChange: () => dispatch(setResultLanguage("zh")) },
+        { name: "language", labelId: "label--english", value: "en", checked: resultLanguage === "en", onChange: () => dispatch(setResultLanguage("en")) },
+        { name: "language", labelId: "label--ch-en-combination", value: "comb", checked: resultLanguage === "comb", onChange: () => dispatch(setResultLanguage("comb")) }
     ]
 
     const display_option = [
-        { name: "display", labelId: "label--this-stop-only", value: "single", checked: resultDisplayStyle === "single", onChange: () => setResultDisplayStyle("single") },
-        { name: "display", labelId: "label--this-and-next-stop", value: "multi", checked: resultDisplayStyle === "multi", onChange: () => setResultDisplayStyle("multi") }
+        { name: "display", labelId: "label--this-stop-only", value: "single", checked: resultDisplayStyle === "single", onChange: () => dispatch(setResultDisplayStyle("single")) },
+        { name: "display", labelId: "label--this-and-next-stop", value: "multi", checked: resultDisplayStyle === "multi", onChange: () => dispatch(setResultDisplayStyle("multi")) }
     ]
 
     const numeric_option = [
-        { name: "display", labelId: "label--show", value: true, checked: numericDisplay === true, onChange: () => setNumericDisplay(true) },
-        { name: "display", labelId: "label--hide", value: false, checked: numericDisplay === false, onChange: () => setNumericDisplay(false) }
+        { name: "display", labelId: "label--show", value: true, checked: numericDisplay === true, onChange: () => dispatch(setNumericDisplay(true)) },
+        { name: "display", labelId: "label--hide", value: false, checked: numericDisplay === false, onChange: () => dispatch(setNumericDisplay(false)) }
     ]
 
     return (
