@@ -5,8 +5,8 @@ import _ from "lodash"
 import { useSelector, useDispatch } from "react-redux";
 import { selectLanguage } from "../features/webConfig/webConfigSlice"
 import {
-  selectRouteList, selectRouteResult, selectStopIDs, selectStopList,
-  setRouteList, setStopList
+  selectRouteList, selectRouteResult, selectStopIDs, selectStopList, selectSelectedRoute,
+  setRouteList, setStopList,
 } from "../features/routeInfo/routeInfoSlice"
 import { selectNumericDisplay, selectResultDisplayStyle, selectResultLanguage }
   from "../features/resultDisplayConfig/resultDisplayConfigSlice";
@@ -21,7 +21,6 @@ import RouteResultList from "../components/RouteResultList"
 import Header from "../components/common/Header";
 
 import { getBusDB } from "../api/request"
-import { route } from "next/dist/server/router";
 
 
 export default function Home() {
@@ -32,6 +31,7 @@ export default function Home() {
   const routeResult = useSelector(selectRouteResult)
   const stopList = useSelector(selectStopList)
   const stopIDs = useSelector(selectStopIDs)
+  const selectedRoute = useSelector(selectSelectedRoute)
 
   const numericDisplay = useSelector(selectNumericDisplay)
   const resultLanguage = useSelector(selectResultLanguage)
@@ -58,10 +58,7 @@ export default function Home() {
     dispatch(setStopList(updatedStops))
   }
 
-  const processRouteList = resp => {
-    dispatch(setRouteList(_.values(resp.routeList)))
-    // console.log(routeList)
-  }
+  const processRouteList = resp => dispatch(setRouteList(_.values(resp.routeList)))
 
   const retrieveData = async () => {
     await getBusDB()
@@ -84,7 +81,7 @@ export default function Home() {
           resultDisplayStyle={resultDisplayStyle} numericDisplay={numericDisplay} />
         <RouteResultList routeResult={routeResult} language={language} />
         <RouteContentBox resultLanguage={resultLanguage} resultDisplayStyle={resultDisplayStyle}
-          stopList={stopList} stopIDs={stopIDs} numericDisplay={numericDisplay} />
+          stopList={stopList} stopIDs={stopIDs} selectedRoute={selectedRoute} numericDisplay={numericDisplay} />
       </div>
     </IntlProvider>
 

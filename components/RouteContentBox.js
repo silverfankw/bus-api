@@ -7,7 +7,7 @@ import NormalButton from "./common/NormalButton"
 import NormalTextArea from "./common/NormalTextArea"
 
 const RouteContentBox = props => {
-    const { stopIDs, stopList, resultLanguage, resultDisplayStyle, numericDisplay } = props
+    const { stopIDs, stopList, selectedRoute, resultLanguage, resultDisplayStyle, numericDisplay } = props
 
     const [formattedStopInfo, setFormattedStopInfo] = useState("")
     const [clickedCopy, setClickedCopy] = useState(false)
@@ -16,6 +16,19 @@ const RouteContentBox = props => {
         navigator.clipboard.writeText(formattedStopInfo)
         setClickedCopy(true)
         setTimeout(() => setClickedCopy(false), 2500)
+    }
+
+    const exportJSON = () => {
+        const stops_detail_json = {
+            ...selectedRoute, "stops": stopIDs.map(currID => {
+                return { "zh": stopList[currID].name["zh"], "en": stopList[currID].name["en"].toUpperCase() }
+            }).concat({ "zh": "", "en": "" }, { "zh": "", "en": "" })
+        }
+
+        const file = new File([JSON.stringify(stops_detail_json)], "stop_detail", { type: 'application/json' })
+        const url = URL.createObjectURL(file);
+        window.open(url, "_blank")
+        URL.revokeObjectURL(url);
     }
 
     useEffect(() => {
@@ -52,6 +65,7 @@ const RouteContentBox = props => {
                 <FontAwesomeIcon className="ml-1 my-1" icon={faBus} />
                 <p className="mx-2"><FormattedMessage id="label--stop-info" /></p>
                 <NormalButton labelIcon={clickedCopy ? faCheck : faCopy} label={clickedCopy ? `button--copied` : `button--copy`} style={`button ${clickedCopy && `bg-green-700`}`} onClick={copyTextContent} />
+                <NormalButton label="button--export-json" style={`button bg-cyan-700 ml-2`} onClick={() => exportJSON()} />
             </div>
             <NormalTextArea
                 placeholder="No data"

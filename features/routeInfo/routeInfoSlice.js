@@ -4,7 +4,8 @@ const initialState = {
     routeResult: [],
     routeList: [],
     stopList: {},
-    stopIDs: []
+    stopIDs: [],
+    selectedRoute: {},
 }
 
 export const routeInfoSlice = createSlice({
@@ -22,7 +23,10 @@ export const routeInfoSlice = createSlice({
         },
         setStopIDs(state, action) {
             state.stopIDs = action.payload
-        }
+        },
+        setSelectedRoute(state, action) {
+            state.selectedRoute = action.payload
+        },
     }
 })
 
@@ -31,7 +35,8 @@ export const selectRouteResult = state => state.routeInfo.routeResult
 export const selectRouteList = state => state.routeInfo.routeList
 export const selectStopList = state => state.routeInfo.stopList
 export const selectStopIDs = state => state.routeInfo.stopIDs
+export const selectSelectedRoute = state => state.routeInfo.selectedRoute
 
-export const { setRouteResult, setRouteList, setStopList, setStopIDs } = routeInfoSlice.actions
+export const { setRouteResult, setRouteList, setStopList, setStopIDs, setSelectedRoute } = routeInfoSlice.actions
 
 export default routeInfoSlice.reducer
