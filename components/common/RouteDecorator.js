@@ -48,7 +48,7 @@ export const RouteDecorator = props => {
                 return <span className="px-2 py-0.5">{route}</span>
         case "ctb":
             if (IS_REGULAR_ROUTE || IS_RED_BG_EXCLUSION)
-                return <span className="bg-sky-500 text-white px-2 py-0.5">{route}</span>
+                return <span className="bg-[#002699] text-white px-2 py-0.5">{route}</span>
         // case "nwfb":
         //     if (IS_REGULAR_ROUTE || IS_RED_BG_EXCLUSION)
         //         return <span className="bg-violet-900 text-white px-2 py-0.5">{route}</span>
