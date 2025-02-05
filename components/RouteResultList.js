@@ -4,7 +4,7 @@ import { faListAlt, faPlayCircle, faFlagCheckered, faSign, faBuilding } from '@f
 
 import { FormattedMessage } from 'react-intl';
 import { useDispatch } from "react-redux";
-import { setStopIDs } from "../features/routeInfo/routeInfoSlice";
+import { setStopIDs, setSelectedRoute } from "../features/routeInfo/routeInfoSlice";
 
 import { companyMap } from "../util/mapper"
 import { RouteDecorator } from "./common/RouteDecorator"
@@ -18,6 +18,7 @@ const RouteResultList = props => {
 
     const searchRouteInfo = async selectedRecord => {
         const availableCompany = Object.keys(selectedRecord.stops)[0]
+        dispatch(setSelectedRoute({ "route": selectedRecord.route, "dest": selectedRecord.dest }))
         dispatch(setStopIDs(selectedRecord.stops[availableCompany]))
     }
 
@@ -54,7 +55,7 @@ const RouteResultList = props => {
                                     <td> {"-"} </td>
                                 </tr> :
                                 routeResult.map((record, index) => {
-                                    console.log(record)
+                                    // console.log(record)
                                     return (
                                         <tr key={`route-result-${index}`} className={`hover-tr ${selectedIndex == index ? `selected-tr` : ``}`} onClick={e => { searchRouteInfo(record); setSelectedIndex(index) }}>
                                             <td key={`route-result-${index}-cmp`}>

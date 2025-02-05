@@ -2,7 +2,7 @@
     "button--search": "Search",
     "button--copy": "Copy to clipboard",
     "button--copied": "Copied!",
-
+    "button--export-json": "Export JSON",
     "header--title": "Youtube Chapter Generator for Hong Kong Bus Routes",
     "header--subtitle": "Create youtube chapter for your bus trip video in just few steps!",
     "header--language-zh": "繁體中文",
@@ -19,12 +19,10 @@
     "label--numeric-expression": "Display bus stop numeric order",
     "label--show": "Show",
     "label--hide": "Hide",
-
     "label--search-result": "Search Result",
     "label--bus-company": "Company",
     "label--bus-route": "Route",
     "label--departure": "Departure",
     "label--destination": "Destination",
-
     "label--stop-info": "Stops Info"
 }
