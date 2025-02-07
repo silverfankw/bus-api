@@ -1,8 +1,26 @@
-Project demo can viewed in (https://hk-bus-service.herokuapp.com/).
+## Live demo: https://silverfankw.github.io/hk-bus-route-video-section-desc-generator/
 
-Original idea for this project was to shorten the manual time defining Youtube chapter based on different bus route.
+Idea for this project was to shorten the manual time defining Youtube chapter based on different bus routes for my video in my youtube channel.
+
+Example usage: 
+1. Input bus route in the left most panel, and select with your prefer option.
+<img src="https://github.com/user-attachments/assets/1e744606-4dd4-422e-9552-dd4919bbe1c4" width="240">
+
+2. Select route in the middle panel.
+<img src="https://github.com/user-attachments/assets/f99c8846-1fcb-448b-82e0-191f115277c2" width="320">
+
+3. Copy the full text by clicking button.
+<img src="https://github.com/user-attachments/assets/40c545fd-d041-4e6e-ac2e-8ca7c7f3b852" width="320">
+
+4. Add the video timestamp with the stop name in Youtube video description like the following.
+<img src="https://github.com/user-attachments/assets/6a095c3e-1628-4397-a836-4f0853c50539" width="240">
+
+5. The chapter will then be shown in the video player. 
+<img src="https://github.com/user-attachments/assets/836e4f40-7b95-49dc-9b15-b7c5e97b4690" width="320">
 
 
+
+---------------------------
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
